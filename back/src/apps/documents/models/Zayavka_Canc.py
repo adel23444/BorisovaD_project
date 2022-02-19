@@ -14,7 +14,7 @@ class Zayavka_Canc(models.Model):
 
     id = models.AutoField(
         verbose_name="Номер заявки на канцелярию",
-        db_column="ZAYV_CANC_IZ",
+        db_column="ZAYV_CANC_ID",
         help_text="Номер заявки на канцелярию",
         primary_key=True,
         unique=True
