@@ -1,15 +1,13 @@
 from django.db import models
-
+from src.apps.people.models import Sotrudnik
 class Zayavka_Canc(models.Model):
 
-    CREATED = 0
-    ACTIVE = 1
-    CLOSED = 2
+    ACTIVE = 0
+    CLOSED = 1
 
     STATUS = (
-        (CREATED,"Заявка создана"),
-        (ACTIVE, "Заявка активна"),
-        (CLOSED, "Заявка закрыта")
+        (ACTIVE, "Активная"),
+        (CLOSED, "Завершена")
     )
 
     id = models.AutoField(
@@ -30,9 +28,36 @@ class Zayavka_Canc(models.Model):
         choices=STATUS,
         db_column="ZAYV_CANC_VID"
     )
-   # cod_sotr = ()
-   # cod_otdel = ()
-   #  num_cab = ()
+
+    zayavitel = models.ForeignKey(
+        to="people.Sotrudnik",
+        related_name="zayavitel",
+        related_query_name="zayavitel",
+        verbose_name="Заявитель",
+        on_delete=models.CASCADE,
+        db_column="ZAYV_CANC_ZAYAVITEL",
+        null=True
+    )
+
+    ispolnitel = models.ForeignKey(
+        to="people.Sotrudnik",
+        related_name="ispolnitel",
+        related_query_name="ispolnitel",
+        verbose_name="Исполнитель",
+        on_delete=models.CASCADE,
+        db_column="ZAYV_CANC_ISPOLNITEL",
+        null=True
+    )
+
+    tovar = models.ForeignKey(
+        to="core.Tovar",
+        related_name="tovar",
+        related_query_name="tovar",
+        verbose_name="Товар",
+        on_delete=models.CASCADE,
+        db_column="ZAYV_CANC_TOVAR"
+    )
+
     summa = models.DecimalField(
         verbose_name="Общая стоимость",
         db_column="ZAYV_CANC_SUMMA",
