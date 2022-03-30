@@ -3,12 +3,12 @@
     <form>
     <h3>Авторизация</h3>
     <div>
-      <input class="inputs" type="text" placeholder="Пользователь">
+      <input v-model="login" class="inputs" type="text" placeholder="Пользователь">
       <br>
-      <input class="inputs"  type="password" placeholder="Пароль">
+      <input v-model="password" class="inputs"  type="password" placeholder="Пароль">
       <br>
       <router-link to="/">
-        <button class="input_button">Войти</button>
+        <button class="input_button" @click="login_to">Войти</button>
       </router-link>
 
     </div>
@@ -19,7 +19,23 @@
 
 <script>
 export default {
-  name: "Login_Wind"
+  name: "Login_Wind",
+  data(){
+    return {
+      login: "",
+      password: ""
+    }
+  },
+  methods: {
+    login_to () {
+      if(this.login == "admin" && this.password == "admin") {
+        this.$store.dispatch('auth/loginAdmin', true)
+      }
+      else if (this.login == "user" && this.password == "user") {
+        this.$store.dispatch('auth/loginUser', true)
+      }
+    }
+  }
 }
 </script>
 

@@ -30,9 +30,18 @@ class Zayavka_Polomka(models.Model):
         choices=STATUS,
         db_column="ZAYV_POLOM_VID"
     )
-   # cod_sotr = ()
-   # cod_otdel = ()
-   #  num_cab = ()
+
+    cod_sotr = models.ForeignKey(
+        to="people.Sotrudnik",
+        related_name="sotrudnik_pol",
+        related_query_name="sotrudnik_pol",
+        verbose_name="Ссылка на сотрудника",
+        on_delete=models.SET_NULL,
+        db_column="ZAYV_POLOM_SOTR",
+        null=True,
+        blank=True,
+        help_text="ID сотрудника"
+    )
 
     class Meta:
         db_table = "ZAYV_POLOMC"

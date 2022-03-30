@@ -7,7 +7,8 @@ class Otdel(models.Model):
         db_column="OTDEL_ID",
         help_text="Код отдела",
         primary_key=True,
-        unique=True
+        unique=True,
+
     )
 
     naim_otdel = models.CharField(

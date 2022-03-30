@@ -1,0 +1,3 @@
+from .cabinet_Serializer import CabinetSerializer
+from .otdel_Serializer import OtdelSerializer
+from .tovar_Serializer import TovarSerializer

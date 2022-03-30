@@ -5,6 +5,11 @@
       <div class="user">Пользователь: <br> {{ user }}</div>
     </div>
     <div class="space"></div>
+    <div class="nav_buttons">
+      <button>Документы</button>
+      <button>Заявки</button>
+    </div>
+    <div class="space"></div>
   </div>
 </template>
 

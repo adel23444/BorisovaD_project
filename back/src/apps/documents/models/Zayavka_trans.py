@@ -44,9 +44,19 @@ class Zayavka_Trans(models.Model):
         blank=True,
         help_text="Время отправления"
     )
-   # cod_sotr = ()
-   # cod_otdel = ()
-   #  num_cab = ()
+
+    cod_sotr = models.ForeignKey(
+        to="people.Sotrudnik",
+        related_name="sotrudnik_trans",
+        related_query_name="sotrudnik_trans",
+        verbose_name="Ссылка на сотрудника",
+        on_delete=models.SET_NULL,
+        db_column="ZAYV_TRANS_SOTR",
+        null=True,
+        blank=True,
+        help_text="ID сотрудника"
+    )
+
     killomentrs = models.IntegerField(
         verbose_name="Киллометраж",
         db_column="ZAYV_TRANS_KILLOM",

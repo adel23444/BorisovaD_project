@@ -1,5 +1,6 @@
 from django.db import models
-from src.apps.people.models import Sotrudnik
+
+
 class Zayavka_Canc(models.Model):
 
     ACTIVE = 0
