@@ -33,10 +33,10 @@
       </div>
 
       <div>
-        <div v-if="propert.status_zay === 0" class="status_active">
+        <div v-if="propert.status_zay === 1" class="status_active">
           <p style="color: white; ">{{statuses(propert.status_zay)}}</p>
         </div>
-        <div v-else-if="propert.status_zay === 1" class="status_closed">
+        <div v-else-if="propert.status_zay === 2" class="status_closed">
           <p style="color: white; ">{{statuses(propert.status_zay)}}</p>
         </div>
       </div>
@@ -69,7 +69,7 @@ export default {
       }
     },
     statuses(status) {
-      if (status === 0) {
+      if (status === 1) {
         return "Активная"
       }
       else {

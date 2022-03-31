@@ -12,6 +12,11 @@ const routes = [
         path: '/login',
         name: 'Login_Wind',
         component: () => import('../views/Login_Wind')
+    },
+    {
+        path: '/new',
+        name: 'New_Zayavka',
+        component: () => import('../views/New_Zayavka')
     }
 ]
 

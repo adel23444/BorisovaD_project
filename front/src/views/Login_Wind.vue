@@ -28,10 +28,10 @@ export default {
   },
   methods: {
     login_to () {
-      if(this.login == "admin" && this.password == "admin") {
+      if(this.login === "admin" && this.password === "admin") {
         this.$store.dispatch('auth/loginAdmin', true)
       }
-      else if (this.login == "user" && this.password == "user") {
+      else if (this.login === "user" && this.password === "user") {
         this.$store.dispatch('auth/loginUser', true)
       }
     }

@@ -30,6 +30,10 @@ export default {
     padding: 1.5% 2%;
     display: flex;
   }
+  .nav_buttons {
+    display: flex;
+    justify-content: center;
+  }
   .user_info {
     display: flex;
     width: 20%;
