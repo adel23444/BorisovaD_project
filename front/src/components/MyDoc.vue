@@ -1,7 +1,7 @@
 <template>
   <div class="my_zayv">
     <div style="display: flex; justify-content: space-between">
-      <h1 style="width: 50%;">Документы</h1>
+      <h1 style="width: 50%; margin-left: 3%">Документы</h1>
       <div class="zayv_buttons" @click="changeStage($event);">
         <div class="button_zay" v-on:click="type_change('')">
           <p style="margin-bottom: 2%; pointer-events: none">Все</p>
@@ -20,9 +20,7 @@
           <hr style="pointer-events: none;">
         </div>
         <div>
-          <router-link to="/new">
             <img style="width: 2.5em; margin-top: 1em;" src="../assets/new_zay.svg" alt="new">
-          </router-link>
         </div>
       </div>
     </div>
@@ -138,10 +136,10 @@ export default {
       return zayavka
     },
     isUser ( ) {
-      return this.$store.getters['auth/isUser']
+      return this.$store.getters['auth/User'] === 'user'
     },
     isBukh ( ) {
-      return this.$store.getters['auth/isBukh']
+      return this.$store.getters['auth/User'] === 'bukh'
     }
   },
   methods: {

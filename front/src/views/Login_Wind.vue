@@ -29,19 +29,16 @@ export default {
   methods: {
     login_to ( ) {
       if(this.login === "admin" && this.password === "admin") {
-        this.$store.dispatch('auth/loginAdmin', true)
-        this.$store.dispatch('auth/loginBukh', false)
-        this.$store.dispatch('auth/loginUser', false)
+        this.$store.dispatch('auth/loginUser', 'admin')
       }
       else if (this.login === "user" && this.password === "user") {
-        this.$store.dispatch('auth/loginUser', true)
-        this.$store.dispatch('auth/loginAdmin', false)
-        this.$store.dispatch('auth/loginBukh', false)
+        this.$store.dispatch('auth/loginUser', 'user')
       }
       else if (this.login === "bukh" && this.password === "bukh") {
-        this.$store.dispatch('auth/loginBukh', true)
-        this.$store.dispatch('auth/loginUser', false)
-        this.$store.dispatch('auth/loginAdmin', false)
+        this.$store.dispatch('auth/loginUser', 'bukh')
+      }
+      else if (this.login === "zav" && this.password === "zav") {
+        this.$store.dispatch('auth/loginUser', 'zav')
       }
     }
   }

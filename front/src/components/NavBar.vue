@@ -6,7 +6,7 @@
         <div class="user">Пользователь: <br> {{ user }}</div>
       </div>
       <div class="space"></div>
-      <div class="nav_buttons" @click="changeStage($event)">
+      <div v-if="isBukh" class="nav_buttons" @click="changeStage($event)">
         <button value="doc" class="clicked_button" v-on:click="click('/doc')">Документы</button>
         <button value="zay" style="margin-left: 10px" v-on:click="click('/')" class="clicked_button">Заявки</button>
       </div>
@@ -22,6 +22,11 @@ export default {
   data() {
     return {
       user: "Борисова Д.М."
+    }
+  },
+  computed: {
+    isBukh ( ) {
+      return this.$store.getters['auth/User'] === 'bukh'
     }
   },
   methods: {
