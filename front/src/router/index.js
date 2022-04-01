@@ -17,6 +17,11 @@ const routes = [
         path: '/new',
         name: 'New_Zayavka',
         component: () => import('../views/New_Zayavka')
+    },
+    {
+        path: '/doc',
+        name: 'MyDoc',
+        component: () => import('../views/Doc_Wind')
     }
 ]
 

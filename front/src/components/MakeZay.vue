@@ -95,7 +95,7 @@
       <div style="margin-top: 2%" v-else-if="selected_vid==='neisp'">
         <div class="num_date">
           <p>№</p>
-          <input class="input_num" type="number">
+          <input  v-model="num" class="input_num" type="number">
           <div class="space"></div>
           <p>от</p>
           <input class="input_num" type="date" v-model="currDate">
@@ -150,7 +150,7 @@
       <div style="margin-top: 2%" v-if="this.selected_vid==='canc'">
         <div class="num_date">
           <p>№</p>
-          <input class="input_num" type="number">
+          <input v-model="num" class="input_num" type="number">
           <div class="space"></div>
           <p>от</p>
           <input class="input_num" type="date" v-model="currDate">
@@ -230,8 +230,7 @@
           <div @click="add_totovars">
             <img style="pointer-events: none" src="../assets/action_plus.svg" alt="plus">
           </div>
-          <div @click="remove_tovfavorit
-          ars">
+          <div @click="remove_tovars">
             <img style="pointer-events: none" src="../assets/action_minus.svg" alt="minus">
           </div>
         </div>

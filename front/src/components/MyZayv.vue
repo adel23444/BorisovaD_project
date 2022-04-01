@@ -1,8 +1,17 @@
 <template>
   <div class="my_zayv">
     <div style="display: flex; justify-content: space-between">
-      <h1 style="width: 90%;">Мои заявки</h1>
+      <h1 v-if="isUser" style="width: 50%;">Мои заявки</h1>
+      <h1 v-if="isBukh" style="width: 50%;">Заявки</h1>
       <div class="zayv_buttons" @click="changeStage($event);">
+        <div v-if="isBukh" class="button_zay" v-on:click="status_change('my')">
+          <p style="margin-bottom: 2%; pointer-events: none">Мои</p>
+          <hr style="pointer-events: none;">
+        </div>
+        <div v-if="isBukh" class="button_zay" v-on:click="status_change('non_nazn')">
+          <p style="margin-bottom: 2%; pointer-events: none">Неназначенные</p>
+          <hr style="pointer-events: none;">
+        </div>
         <div class="button_zay" v-on:click="status_change('')">
           <p style="margin-bottom: 2%; pointer-events: none">Все</p>
           <hr style="pointer-events: none;">
@@ -47,7 +56,8 @@ export default {
           vrem: "14:00",
           num: 180,
           date: "19.12.2021",
-          status_zay: 1
+          status_zay: 1,
+          isp: ''
         },
         {
           type: 0,
@@ -57,13 +67,28 @@ export default {
           num: 154,
           status_zay: 2,
           date: "17.12.2021",
+          isp: 'Иванова И.И.',
+          links: [
+            {
+              name: 'Акт на выдачу'
+            },
+            {
+              name: 'Акт на списание'
+            }
+          ]
         },
         {
           type: 2,
           comment: "Не работает кондиционер",
           date: "11.11.2021",
           status_zay: 2,
-          num: 130
+          num: 130,
+          isp: 'Петров П.П.',
+          links: [
+            {
+              name: 'Акт о выполненных работах'
+            }
+          ]
         }
       ],
       status: ''
@@ -72,10 +97,20 @@ export default {
   computed: {
     zayavka () {
       let zayavka = [...this.zayvaks]
-      if (this.status) {
+      if (this.status === 'non_nazn') {
+        zayavka = this.zayvaks.filter(zayavka => zayavka.isp === '')
+      }
+      else if (this.status) {
         zayavka =  this.zayvaks.filter(zayvaka => zayvaka.status_zay === this.status)
       }
+
       return zayavka
+    },
+    isUser ( ) {
+      return this.$store.getters['auth/isUser']
+    },
+    isBukh ( ) {
+      return this.$store.getters['auth/isBukh']
     }
   },
   methods: {
