@@ -1,7 +1,7 @@
 <template>
   <div class="my_zayv">
     <div style="display: flex; justify-content: space-between">
-      <h1 v-if="isUser" style="width: 50%; margin-left: 3%">Мои заявки</h1>
+      <h1 v-if="isUser||isAdmin" style="width: 50%; margin-left: 3%">Мои заявки</h1>
       <h1 v-if="isBukh" style="width: 50%; margin-left: 3%">Заявки</h1>
       <div class="zayv_buttons" @click="changeStage($event);">
         <div v-if="isBukh" class="button_zay" v-on:click="status_change('my')">
@@ -111,6 +111,9 @@ export default {
     },
     isBukh ( ) {
       return this.$store.getters['auth/User'] === 'bukh'
+    },
+    isAdmin () {
+      return this.$store.getters['auth/User'] === 'admin'
     }
   },
   methods: {

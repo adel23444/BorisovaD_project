@@ -22,6 +22,11 @@ const routes = [
         path: '/doc',
         name: 'MyDoc',
         component: () => import('../views/Doc_Wind')
+    },
+    {
+        path: '/users',
+        name: 'Users',
+        component: () => import("../views/User_Wind")
     }
 ]
 
