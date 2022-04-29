@@ -1,0 +1,3 @@
+from .zayavka_canc_viewset import ZayavkaCancViewSet
+from .zayavka_polomka_viewset import ZayavkaPolomkaViewSet
+from .zayavka_trans_viewset import ZayavkaTransViewSet

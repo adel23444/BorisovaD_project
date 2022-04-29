@@ -56,7 +56,6 @@ export default {
           vrem: "14:00",
           num: 180,
           date: "19.12.2021",
-          status_zay: 1,
           isp: ''
         },
         {
@@ -81,9 +80,22 @@ export default {
           type: 2,
           comment: "Не работает кондиционер",
           date: "11.11.2021",
+          status_zay: 1,
+          num: 130,
+          isp: 'Петров Б.П.',
+          links: [
+            {
+              name: 'Акт о выполненных работах'
+            }
+          ]
+        },
+        {
+          type: 2,
+          comment: "Не работает принтер",
+          date: "11.11.2021",
           status_zay: 2,
           num: 130,
-          isp: 'Петров П.П.',
+          isp: 'Петров Б.П.',
           links: [
             {
               name: 'Акт о выполненных работах'
@@ -95,15 +107,27 @@ export default {
     }
   },
   computed: {
-    zayavka () {
+    user_filter () {
       let zayavka = [...this.zayvaks]
-      if (this.status === 'non_nazn') {
-        zayavka = this.zayvaks.filter(zayavka => zayavka.isp === '')
+      if (this.isUser) {
+        zayavka = this.zayvaks.filter(zayavk => zayavk.isp !== '')
+      }
+      return zayavka
+    },
+    zayavka () {
+      let zayavka = this.user_filter
+      if (this.status === 'my') {
+        let name = this.$store.getters['auth/UserName']
+        zayavka = zayavka.filter(zaya => zaya.isp === name)
+        console.log(zayavka)
+      }
+      else if (this.status === 'non_nazn') {
+        zayavka = zayavka.filter(zayavk => zayavk.isp === '')
+        console.log(zayavka)
       }
       else if (this.status) {
-        zayavka =  this.zayvaks.filter(zayvaka => zayvaka.status_zay === this.status)
+        zayavka =  this.zayvaks.filter(zayvak => zayvak.status_zay === this.status)
       }
-
       return zayavka
     },
     isUser ( ) {

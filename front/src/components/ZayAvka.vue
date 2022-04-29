@@ -20,7 +20,7 @@
     </div>
     <div style="display: flex">
       <div style="width: 80%">
-        <div v-if="propert.type === 0" class="zay_params">
+        <div v-if="propert.type === 0" class="zay_propert">
           <div style="display: flex;">
             <img style="width: 1.5vw; margin-right: 1em " src="../assets/comment.svg" alt="comment">
             <p>{{propert.tov_name}}</p>
@@ -29,7 +29,7 @@
           <p>Стоимость: {{propert.cena}} рублей</p>
           <div style="width: 10%"></div>
         </div>
-        <div v-else-if="propert.type === 1" class="zay_params" style="font-size: 14px">
+        <div v-else-if="propert.type === 1" class="zay_propert" style="font-size: 14px">
           <div style="display: flex;">
             <img style="width: 1.5vw; margin-right: 1em " src="../assets/address.svg" alt="address">
             <p>Адрес: {{propert.addr}}</p>
@@ -50,7 +50,7 @@
             <img src="../assets/Calendar.svg" alt="calendar">
             <p style="font-size: 14px">{{propert.date}}</p>
           </div>
-          <div>
+          <div v-if="isBukh||isZav">
             <p style="color: #184F05; font-weight: 600; font-size: 16px">Назначен исполнитель:
               <span v-if="propert.isp">{{propert.isp}}</span>
               <span style="color: red" v-else>не назначено</span>
@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div v-if="isZav||isBukh">
         <p style="font-weight: 600; font-size: 14px">
           Документы:
         </p>
@@ -77,6 +77,20 @@ export default {
   props: {
     propert: {
       type: Object
+    },
+  },
+  computed: {
+    isUser ( ) {
+      return this.$store.getters['auth/User'] === 'user'
+    },
+    isBukh ( ) {
+      return this.$store.getters['auth/User'] === 'bukh'
+    },
+    isAdmin () {
+      return this.$store.getters['auth/User'] === 'admin'
+    },
+    isZav () {
+      return this.$store.getters['auth/User'] === 'zav'
     },
   },
   methods: {

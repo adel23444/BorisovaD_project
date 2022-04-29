@@ -18,7 +18,8 @@ class CabinetOtdel(models.Model):
         on_delete=models.CASCADE,
         db_column="OTDEL_ID"
     )
-
+    def __str__(self):
+        return f"{self.otdel.naim_otdel} - кабинет №{self.cabinet.number_cabinet}"
     class Meta:
         db_table = "cabinet_otdel"
         verbose_name = "Связка кабинетов с отделами"

@@ -16,7 +16,8 @@ class Cabinet(models.Model):
         help_text="Номер кабинета",
         max_length=10
     )
-
+    def __str__(self):
+        return f"Кабинет №{self.number_cabinet}"
     class Meta:
         db_table = "CABINET"
         verbose_name = "Кабинет"

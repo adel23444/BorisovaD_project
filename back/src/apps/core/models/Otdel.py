@@ -19,7 +19,8 @@ class Otdel(models.Model):
         blank=False,
         max_length=255
     )
-
+    def __str__(self):
+        return self.naim_otdel
     class Meta:
         db_table = "OTDEL"
         verbose_name = "Отдел"
