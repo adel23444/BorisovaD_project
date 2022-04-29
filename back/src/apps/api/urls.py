@@ -1,11 +1,9 @@
 from django.urls import path
 from rest_framework.routers import SimpleRouter
-from rest_framework_simplejwt.views import TokenRefreshView
+from rest_framework_simplejwt.views import (TokenRefreshView, TokenObtainPairView)
 
 from .viewsets import (CabinetViewSet, OtdelViewSet,TovarViewSet,
-                        ZayavkaCancViewSet, ZayavkaPolomkaViewSet, ZayavkaTransViewSet
-
-                       )
+                        ZayavkaCancViewSet, ZayavkaPolomkaViewSet, ZayavkaTransViewSet)
 
 app_name = "api"
 
@@ -20,6 +18,7 @@ router.register("zayavka_trans", ZayavkaTransViewSet, basename="zayavka_trans")
 
 
 urlpatterns = [
+    path("token", TokenObtainPairView.as_view(), name="token"),
     path("token/refresh", TokenRefreshView.as_view(), name="token_refresh"),
 ]
 
