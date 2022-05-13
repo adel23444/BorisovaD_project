@@ -1,6 +1,7 @@
 from django.utils.decorators import method_decorator
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from src.apps.core.models import Cabinet
 from src.apps.api.serializers.core import CabinetSerializer
@@ -43,4 +44,5 @@ from src.apps.api.serializers.core import CabinetSerializer
 class CabinetViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'patch']
     serializer_class = CabinetSerializer
+    permission_classes = (IsAuthenticated, )
     queryset = Cabinet.objects.all()

@@ -1,6 +1,7 @@
 from django.utils.decorators import method_decorator
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from src.apps.core.models import Otdel
 from src.apps.api.serializers.core import OtdelSerializer
@@ -43,4 +44,5 @@ from src.apps.api.serializers.core import OtdelSerializer
 class OtdelViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'patch']
     serializer_class = OtdelSerializer
+    permission_classes = (IsAuthenticated,)
     queryset = Otdel.objects.all()

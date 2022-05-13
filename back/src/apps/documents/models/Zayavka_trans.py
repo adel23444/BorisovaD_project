@@ -1,15 +1,12 @@
 from django.db import models
 
 class Zayavka_Trans(models.Model):
-
-    CREATED = 0
-    ACTIVE = 1
-    CLOSED = 2
+    ACTIVE = 0
+    CLOSED = 1
 
     STATUS = (
-        (CREATED,"Заявка создана"),
-        (ACTIVE, "Заявка активна"),
-        (CLOSED, "Заявка закрыта")
+        (ACTIVE, "Активная"),
+        (CLOSED, "Завершена")
     )
 
     id = models.AutoField(
@@ -62,6 +59,24 @@ class Zayavka_Trans(models.Model):
         db_column="ZAYV_TRANS_KILLOM",
         null=True,
         blank=True,
+    )
+
+    punkt_nazn = models.CharField(
+        verbose_name="Пункт назначения",
+        db_column="ZAYV_TRANS_PUNKT",
+        help_text="Пункт назначения",
+        max_length=255,
+        null=True,
+        blank=True
+    )
+
+    address = models.CharField(
+        verbose_name="Адрес",
+        db_column="ZAYV_TRANS_ADRES",
+        help_text="Адрес",
+        max_length=255,
+        null=True,
+        blank=True
     )
 
     class Meta:

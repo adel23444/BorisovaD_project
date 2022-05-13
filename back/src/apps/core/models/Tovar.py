@@ -36,6 +36,9 @@ class Tovar(models.Model):
         blank=False
     )
 
+    def __str__(self):
+        return f"{self.naim_tovar}"
+
     class Meta:
         db_table = "TOVAR"
         verbose_name = "Товар"

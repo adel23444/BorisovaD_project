@@ -3,13 +3,13 @@
     <div style="display: flex; justify-content: space-between">
       <p class="zay_zagol">{{types(propert.type)}}</p>
       <div style="display: flex; align-items: center">
-        <p class="zay_zagol" style="margin-right: 6%">№{{propert.num}}</p>
+        <p class="zay_zagol" style="margin-right: 6%">№{{propert.id}}</p>
         <div>
-          <div v-if="propert.status_zay === 1 && propert.isp" class="status_active">
-            <p style="color: white; ">{{statuses(propert.status_zay)}}</p>
+          <div v-if="propert.status === 0 || propert.isp" class="status_active">
+            <p style="color: white; ">{{statuses(propert.status)}}</p>
           </div>
-          <div v-else-if="propert.status_zay === 2" class="status_closed">
-            <p style="color: white; ">{{statuses(propert.status_zay)}}</p>
+          <div v-else-if="propert.status === 1" class="status_closed">
+            <p style="color: white; ">{{statuses(propert.status)}}</p>
           </div>
           <div v-if="propert.isp === ''" class="status_closed" style="background-color: #ED0C0C">
             <p style="color: white; ">Назначить</p>
@@ -48,11 +48,11 @@
         <div style="display: flex">
           <div style="display: flex; justify-content: space-evenly; width: 15%; align-items: center">
             <img src="../assets/Calendar.svg" alt="calendar">
-            <p style="font-size: 14px">{{propert.date}}</p>
+            <p style="font-size: 14px">{{propert.date_zayavka}}</p>
           </div>
           <div v-if="isBukh||isZav">
             <p style="color: #184F05; font-weight: 600; font-size: 16px">Назначен исполнитель:
-              <span v-if="propert.isp">{{propert.isp}}</span>
+              <span v-if="propert.isp">{{propert.user}}</span>
               <span style="color: red" v-else>не назначено</span>
             </p>
           </div>
@@ -90,7 +90,7 @@ export default {
       return this.$store.getters['auth/User'] === 'admin'
     },
     isZav () {
-      return this.$store.getters['auth/User'] === 'zav'
+      return this.$store.getters['auth/User'] === 'zavhoz'
     },
   },
   methods: {
@@ -106,7 +106,7 @@ export default {
       }
     },
     statuses(status) {
-      if (status === 1) {
+      if (status === 0) {
         return "Активная"
       }
       else {

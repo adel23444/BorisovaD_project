@@ -33,7 +33,7 @@
     </div>
 
     <div class="list_zay">
-      <ZayAvka v-for="(propert, $index) in zayavka" :key="$index"
+      <ZayAvka v-for="(propert, $index) in zayavka_polom" :key="$index"
                :propert="propert"
       />
     </div>
@@ -138,11 +138,20 @@ export default {
     },
     isAdmin () {
       return this.$store.getters['auth/User'] === 'admin'
+    },
+    zayavka_polom () {
+      return this.$store.getters['zayavka_polom/Zayavka_polomka']
     }
+  },
+  mounted() {
+    this.fetch()
   },
   methods: {
     status_change (num) {
       this.status = num
+    },
+    fetch() {
+      return this.$store.dispatch('zayavka_polom/get_zayavka')
     },
     changeStage (event) {
       const elements = document.querySelectorAll('.button_zay')

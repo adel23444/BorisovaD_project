@@ -28,23 +28,26 @@ export default {
   },
   methods: {
     login_to ( ) {
-      let user = {}
-      if(this.login === "admin" && this.password === "admin") {
-        user.name = "Светлов С.С."
-        user.token = "admin"
+      let user = {
+        "username": this.login,
+        "password": this.password
       }
-      else if (this.login === "user" && this.password === "user") {
-        user.name = "Борисова Д.М."
-        user.token = "user"
-      }
-      else if (this.login === "bukh" && this.password === "bukh") {
-        user.name = "Петров Б.П."
-        user.token = "bukh"
-      }
-      else if (this.login === "zav" && this.password === "zav") {
-        user.name = "Иванова И.И."
-        user.token = "zav"
-      }
+      // if(this.login === "admin" && this.password === "admin") {
+      //   user.name = "Светлов С.С."
+      //   user.token = "admin"
+      // }
+      // else if (this.login === "user" && this.password === "user") {
+      //   user.name = "Борисова Д.М."
+      //   user.token = "user"
+      // }
+      // else if (this.login === "bukh" && this.password === "bukh") {
+      //   user.name = "Петров Б.П."
+      //   user.token = "bukh"
+      // }
+      // else if (this.login === "zav" && this.password === "zav") {
+      //   user.name = "Иванова И.И."
+      //   user.token = "zav"
+      // }
       this.$store.dispatch('auth/loginUser', user)
     }
   }

@@ -1,6 +1,7 @@
 from django.utils.decorators import method_decorator
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 from src.apps.documents.models import Zayavka_Trans
 from src.apps.api.serializers.documents import ZayavkaTransSerializer
@@ -43,4 +44,5 @@ from src.apps.api.serializers.documents import ZayavkaTransSerializer
 class ZayavkaTransViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'patch']
     serializer_class = ZayavkaTransSerializer
+    permission_classes = (IsAuthenticated,)
     queryset = Zayavka_Trans.objects.all()

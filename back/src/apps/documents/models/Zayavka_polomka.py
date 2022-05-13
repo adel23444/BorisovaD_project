@@ -2,14 +2,12 @@ from django.db import models
 
 class Zayavka_Polomka(models.Model):
 
-    CREATED = 0
-    ACTIVE = 1
-    CLOSED = 2
+    ACTIVE = 0
+    CLOSED = 1
 
     STATUS = (
-        (CREATED,"Заявка создана"),
-        (ACTIVE, "Заявка активна"),
-        (CLOSED, "Заявка закрыта")
+        (ACTIVE, "Активная"),
+        (CLOSED, "Завершена")
     )
 
     id = models.AutoField(
@@ -19,14 +17,16 @@ class Zayavka_Polomka(models.Model):
         primary_key=True,
         unique=True
     )
-    date_zayvka = models.DateField(
+
+    date_zayavka = models.DateField(
         verbose_name="Дата заявки о поломке",
         db_column="ZAYV_POLOM_DATE",
         auto_now_add=True,
         help_text="Дата заявки о поломке",
     )
+
     vid_zayavka = models.IntegerField(
-        verbose_name="Вид заявки",
+        verbose_name="Статус заявки",
         choices=STATUS,
         db_column="ZAYV_POLOM_VID"
     )
@@ -43,6 +43,13 @@ class Zayavka_Polomka(models.Model):
         help_text="ID сотрудника"
     )
 
+    comment = models.TextField(
+        verbose_name="Комментарий",
+        db_column="ZAYV_POLOM_COMM",
+        help_text="Комментарий",
+        null=True,
+        blank=True
+    )
     class Meta:
         db_table = "ZAYV_POLOMC"
         verbose_name = "Заявка о поломке"

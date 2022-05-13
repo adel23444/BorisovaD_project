@@ -1,8 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class Sotrudnik(models.Model):
+class Sotrudnik(AbstractUser):
 
-    code_sotr = models.AutoField(
+    id = models.AutoField(
         primary_key=True,
         verbose_name="Код сотрудника",
         db_column="SOTRUD_ID",
@@ -10,11 +11,12 @@ class Sotrudnik(models.Model):
         unique=True
     )
 
-    FIO = models.CharField(
-        verbose_name="ФИО сотрудника",
+    username = models.CharField(
+        verbose_name="Имя профиля",
         db_column="SOTRUD_FIO",
-        help_text="ФИО сотрудника",
+        help_text="Имя профиля",
         max_length=255,
+        unique=True,
         null=False
     )
     #здесь возможно дополню таблицей с должностями
@@ -35,6 +37,9 @@ class Sotrudnik(models.Model):
         null=True,
         blank=True
     )
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name}"
 
     class Meta:
         db_table = "SOTRUD"
