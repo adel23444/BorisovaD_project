@@ -7,8 +7,8 @@ export default {
         zayavka: []
     },
     getters: {
-        My_zayavka_polomka: state => state.my_zayavka,
-        Zayavka_polomka: state => state.zayavka
+        My_zayavka_canc: state => state.my_zayavka,
+        Zayavka_canc: state => state.zayavka
     },
     mutations: {
         MY_ZAYAVKA_SET (state, payload) {
@@ -21,7 +21,7 @@ export default {
     actions: {
         get_my_zayavka ({ commit }) {
             return new Promise((resolve, reject) => {
-                http.api.get('zayavka_polomka/my/').then((response) => {
+                http.api.get('zayavka_canc/my/').then((response) => {
                     commit('MY_ZAYAVKA_SET', response)
                     resolve(response)
                 }).catch((error) => {
@@ -32,7 +32,7 @@ export default {
         },
         get_zayavka ({ commit }) {
             return new Promise((resolve, reject) => {
-                http.api.get('zayavka_polomka/').then((response) => {
+                http.api.get('zayavka_canc/').then((response) => {
                     commit('ZAYAVKA_SET', response)
                     resolve(response)
                 }).catch((error) => {

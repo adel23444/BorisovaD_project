@@ -33,7 +33,7 @@
     </div>
 
     <div class="list_zay">
-      <ZayAvka v-for="(propert, $index) in zayavka_polom" :key="$index"
+      <ZayAvka v-for="(propert) in zayavkas" :key="propert.id"
                :propert="propert"
       />
     </div>
@@ -50,23 +50,23 @@ export default {
       zayvaks: [
         {
           type: 1,
-          addr: "Проспект Победы, д. 152",
-          punkt: "Почта РФ",
-          data_dost: "20.12.2021",
-          vrem: "14:00",
-          num: 180,
-          date: "19.12.2021",
-          isp: ''
+          address: "Проспект Победы, д. 152",
+          punkt_nazn: "Почта РФ",
+          data_otpr: "20.12.2021",
+          time_otpr: "14:00",
+          id: 180,
+          date_zayavka: "19.12.2021",
+          user: ''
         },
         {
           type: 0,
           tov_name: "Бумага А4",
           count: 2,
           cena: 200,
-          num: 154,
-          status_zay: 2,
-          date: "17.12.2021",
-          isp: 'Иванова И.И.',
+          id: 154,
+          status: 1,
+          date_zayavka: "17.12.2021",
+          user: 'Иванова И.И.',
           links: [
             {
               name: 'Акт на выдачу'
@@ -79,10 +79,10 @@ export default {
         {
           type: 2,
           comment: "Не работает кондиционер",
-          date: "11.11.2021",
-          status_zay: 1,
-          num: 130,
-          isp: 'Петров Б.П.',
+          date_zayavka: "11.11.2021",
+          status: 0,
+          id: 130,
+          user: 'Петров Б.П.',
           links: [
             {
               name: 'Акт о выполненных работах'
@@ -92,10 +92,10 @@ export default {
         {
           type: 2,
           comment: "Не работает принтер",
-          date: "11.11.2021",
-          status_zay: 2,
+          date_zayavka: "11.11.2021",
+          status: 1,
           num: 130,
-          isp: 'Петров Б.П.',
+          user: 'Петров Б.П.',
           links: [
             {
               name: 'Акт о выполненных работах'
@@ -140,7 +140,63 @@ export default {
       return this.$store.getters['auth/User'] === 'admin'
     },
     zayavka_polom () {
-      return this.$store.getters['zayavka_polom/Zayavka_polomka']
+
+      let zayavka = []
+      if (this.status === 'my' || this.isUser) {
+        zayavka = this.$store.getters['zayavka_polom/My_zayavka_polomka']
+      }
+      else {
+        zayavka = this.$store.getters['zayavka_polom/Zayavka_polomka']
+      }
+
+      return zayavka
+    },
+    zayavka_canc () {
+
+      let zayavka = []
+      if (this.status === 'my' || this.isUser) {
+        zayavka = this.$store.getters['zayavka_canc/My_zayavka_canc']
+      }
+      else {
+        zayavka = this.$store.getters['zayavka_canc/Zayavka_canc']
+      }
+
+      return zayavka
+    },
+    zayavka_trans () {
+
+      let zayavka = []
+      if (this.status === 'my' || this.isUser) {
+        zayavka = this.$store.getters['zayavka_trans/My_zayavka_trans']
+      }
+      else {
+        zayavka = this.$store.getters['zayavka_trans/Zayavka_trans']
+      }
+
+      return zayavka
+    },
+    zayavkas () {
+      let zayavka = []
+      this.zayavka_polom.forEach((el) => {
+        zayavka.push(el)
+      })
+      this.zayavka_trans.forEach((el) => {
+        zayavka.push(el)
+      })
+      this.zayavka_canc.forEach((el) => {
+        zayavka.push(el)
+      })
+      console.log(zayavka)
+      if (this.status === 'non_nazn') {
+        zayavka = zayavka.filter( x=> x.status === 3)
+        console.log(zayavka)
+      }
+      else if (this.status != '' && this.status != 'my') {
+        console.log(this.status)
+        zayavka = zayavka.filter( x => x.status === this.status)
+        console.log(zayavka)
+      }
+      return zayavka
     }
   },
   mounted() {
@@ -151,7 +207,12 @@ export default {
       this.status = num
     },
     fetch() {
-      return this.$store.dispatch('zayavka_polom/get_zayavka')
+      this.$store.dispatch('zayavka_polom/get_zayavka')
+      this.$store.dispatch('zayavka_polom/get_my_zayavka')
+      this.$store.dispatch('zayavka_trans/get_zayavka')
+      this.$store.dispatch('zayavka_trans/get_my_zayavka')
+      this.$store.dispatch('zayavka_canc/get_zayavka')
+      this.$store.dispatch('zayavka_canc/get_my_zayavka')
     },
     changeStage (event) {
       const elements = document.querySelectorAll('.button_zay')

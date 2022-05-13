@@ -5,7 +5,7 @@ export default {
     state: {
         token: localStorage.getItem('token') || '',
         isUser: localStorage.getItem('user')||'',
-        UserName: ""
+        UserName: localStorage.getItem('name') || ''
     },
     getters: {
         User: state => state.isUser,
@@ -22,6 +22,7 @@ export default {
         },
         NAME (state, payload) {
             state.UserName = payload
+            localStorage.setItem('name', state.UserName)
         }
     },
     actions: {

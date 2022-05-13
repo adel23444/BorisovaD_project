@@ -1,12 +1,10 @@
-import json
-
 from django.utils.decorators import method_decorator
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.db.models import Q
+
 
 from src.apps.documents.models import Zayavka_Polomka
 from src.apps.api.serializers.documents import ZayavkaPolomkaSerializer

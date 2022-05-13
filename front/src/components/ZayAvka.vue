@@ -5,15 +5,16 @@
       <div style="display: flex; align-items: center">
         <p class="zay_zagol" style="margin-right: 6%">№{{propert.id}}</p>
         <div>
-          <div v-if="propert.status === 0 || propert.isp" class="status_active">
-            <p style="color: white; ">{{statuses(propert.status)}}</p>
-          </div>
-          <div v-else-if="propert.status === 1" class="status_closed">
-            <p style="color: white; ">{{statuses(propert.status)}}</p>
-          </div>
-          <div v-if="propert.isp === ''" class="status_closed" style="background-color: #ED0C0C">
+          <div v-if="!propert.user" class="status_closed" style="background-color: #ED0C0C">
             <p style="color: white; ">Назначить</p>
           </div>
+          <div v-else-if="propert.status === 1" class="status_active">
+            <p style="color: white; ">{{statuses(propert.status)}}</p>
+          </div>
+          <div v-else-if="propert.status === 2" class="status_closed">
+            <p style="color: white; ">{{statuses(propert.status)}}</p>
+          </div>
+
         </div>
       </div>
 
@@ -23,19 +24,19 @@
         <div v-if="propert.type === 0" class="zay_propert">
           <div style="display: flex;">
             <img style="width: 1.5vw; margin-right: 1em " src="../assets/comment.svg" alt="comment">
-            <p>{{propert.tov_name}}</p>
+            <p>{{propert.tovar_name}}</p>
           </div>
-          <p>Количество: {{propert.count}} шт.</p>
-          <p>Стоимость: {{propert.cena}} рублей</p>
+          <p>Количество: {{propert.tovar_kolvo}} шт.</p>
+          <p>Стоимость: {{propert.summa}} рублей</p>
           <div style="width: 10%"></div>
         </div>
         <div v-else-if="propert.type === 1" class="zay_propert" style="font-size: 14px">
           <div style="display: flex;">
             <img style="width: 1.5vw; margin-right: 1em " src="../assets/address.svg" alt="address">
-            <p>Адрес: {{propert.addr}}</p>
+            <p>Адрес: {{propert.address}}</p>
           </div>
-          <p>Пункт назначения: {{propert.punkt}}</p>
-          <p>Дата: {{propert.data_dost}} в {{propert.vrem}}</p>
+          <p>Пункт назначения: {{propert.punkt_nazn}}</p>
+          <p>Дата: {{propert.date_otpr}} в {{propert.time_otpr}}</p>
           <div style="width: 2%"></div>
         </div>
         <div v-else-if="propert.type === 2" class="neispravn">
@@ -52,7 +53,7 @@
           </div>
           <div v-if="isBukh||isZav">
             <p style="color: #184F05; font-weight: 600; font-size: 16px">Назначен исполнитель:
-              <span v-if="propert.isp">{{propert.user}}</span>
+              <span v-if="propert.user">{{propert.user}}</span>
               <span style="color: red" v-else>не назначено</span>
             </p>
           </div>
@@ -106,7 +107,7 @@ export default {
       }
     },
     statuses(status) {
-      if (status === 0) {
+      if (status === 1) {
         return "Активная"
       }
       else {

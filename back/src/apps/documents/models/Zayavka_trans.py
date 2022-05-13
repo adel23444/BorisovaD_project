@@ -1,8 +1,8 @@
 from django.db import models
 
 class Zayavka_Trans(models.Model):
-    ACTIVE = 0
-    CLOSED = 1
+    ACTIVE = 1
+    CLOSED = 2
 
     STATUS = (
         (ACTIVE, "Активная"),
@@ -16,14 +16,14 @@ class Zayavka_Trans(models.Model):
         primary_key=True,
         unique=True
     )
-    date_zayvka = models.DateField(
+    date_zayavka = models.DateField(
         verbose_name="Дата заявки на транспорт",
         db_column="ZAYV_TRANS_DATE",
         auto_now_add=True,
         help_text="Дата заявки на транспорт",
     )
-    vid_zayavka = models.IntegerField(
-        verbose_name="Вид заявки",
+    status = models.IntegerField(
+        verbose_name="Статус",
         choices=STATUS,
         db_column="ZAYV_TRANS_VID"
     )

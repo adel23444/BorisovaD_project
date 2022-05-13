@@ -2,8 +2,8 @@ from django.db import models
 
 class Zayavka_Polomka(models.Model):
 
-    ACTIVE = 0
-    CLOSED = 1
+    ACTIVE = 1
+    CLOSED = 2
 
     STATUS = (
         (ACTIVE, "Активная"),
@@ -25,7 +25,7 @@ class Zayavka_Polomka(models.Model):
         help_text="Дата заявки о поломке",
     )
 
-    vid_zayavka = models.IntegerField(
+    status = models.IntegerField(
         verbose_name="Статус заявки",
         choices=STATUS,
         db_column="ZAYV_POLOM_VID"
