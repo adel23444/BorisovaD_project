@@ -22,7 +22,7 @@ class UserInfoViewSet(views.APIView):
             return Response(
                 {
                     'name': f"{request.user.last_name} {request.user.first_name}",
-                    'role': request.user.username
+                    'role': request.user.dolgnost
                 },
                 status=status.HTTP_200_OK
             )
