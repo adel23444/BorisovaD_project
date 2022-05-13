@@ -3,6 +3,18 @@ from django.contrib.auth.models import AbstractUser
 
 class Sotrudnik(AbstractUser):
 
+    ADMIN = 'admin'
+    USER = 'user'
+    BUKHGALTER = 'bukh'
+    ZAVHOZ = 'zavhoz'
+
+    ROLE = (
+        (ADMIN, "Администратор"),
+        (USER, "Пользователь"),
+        (BUKHGALTER, "Бухгалтер"),
+        (ZAVHOZ, "Заведующий хозяйством")
+    )
+
     id = models.AutoField(
         primary_key=True,
         verbose_name="Код сотрудника",
@@ -26,7 +38,8 @@ class Sotrudnik(AbstractUser):
         help_text="Должность",
         max_length=255,
         null=True,
-        blank=True
+        blank=True,
+        choices=ROLE
     )
 
     phone = models.CharField(
